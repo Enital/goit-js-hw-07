@@ -17,21 +17,33 @@ function createGalleryItem(items) {
 
 const galleryEl = document.querySelector(".gallery");
 const addGalleryItem = createGalleryItem(galleryItems);
+let instance = '';
 
 galleryEl.insertAdjacentHTML("afterbegin", addGalleryItem);
 
 galleryEl.addEventListener("click", onImageClick);
-galleryEl.removeEventListener("click", onImageClick);
 
 function onImageClick(event) {
     event.preventDefault();
-    const instance =
-    basicLightbox.create(`<img src="${event.target.dataset.original}" 
-    alt="${event.target.alt}">`);
-    instance.show();
-    galleryEl.addEventListener("keydown", (event) => {
+    instance =
+        basicLightbox.create(`<img src="${event.target.dataset.original}" 
+        alt="${event.target.alt}">`, {
+            onShow: openModal,
+            onClose: closeModal,
+        });
+    instance.show();    
+};
+
+function openModal() {
+    galleryEl.addEventListener("keydown", keyEscPressed);
+}
+
+function closeModal() {
+    galleryEl.removeEventListener("keydown", keyEscPressed);
+}
+
+function keyEscPressed(event) {
         if (event.code === "Escape") {
             instance.close();            
         }
-    });
-}
+    }
