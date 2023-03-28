@@ -21,6 +21,7 @@ const addGalleryItem = createGalleryItem(galleryItems);
 galleryEl.insertAdjacentHTML("afterbegin", addGalleryItem);
 
 galleryEl.addEventListener("click", onImageClick);
+galleryEl.removeEventListener("click", onImageClick);
 
 function onImageClick(event) {
     event.preventDefault();
@@ -29,8 +30,8 @@ function onImageClick(event) {
     alt="${event.target.alt}">`);
     instance.show();
     galleryEl.addEventListener("keydown", (event) => {
-    if (event.code === "Escape") {
-        instance.close();
-    }
+        if (event.code === "Escape") {
+            instance.close();            
+        }
     });
 }

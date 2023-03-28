@@ -21,6 +21,7 @@ const addGalleryItem = createGalleryItem(galleryItems);
 galleryEl.insertAdjacentHTML("afterbegin", addGalleryItem);
 
 let lightbox = new SimpleLightbox(".gallery .gallery__link", {
+    captionPosition: 'center',
     captionsData: 'alt',
     captionDelay: 250,
     close: false,
